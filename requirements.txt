@@ -1,0 +1,10 @@
+<<<<<<< HEAD
+flask
+flask_sqlalchemy
+werkzeug
+=======
+Flask
+Flask_SQLAlchemy
+Werkzeug
+gunicorn
+>>>>>>> b2edcefcd60910b75896dc82c968832005891822

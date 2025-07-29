@@ -1,0 +1,148 @@
+<<<<<<< HEAD
+
+<!DOCTYPE html>
+<html>
+<head><title>Home</title></head>
+<body>
+    <h1>Welcome to Poultry Farmers Hub</h1>
+    <a href="/login">Login</a> | <a href="/signup">Sign Up</a>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poultry Farmers Hub</title>
+</head>
+<body>
+    <h1>Welcome to Poultry Farmers Hub</h1>
+
+    <div id="authSection">
+        <h2>Sign Up</h2>
+        <input type="text" id="signupUsername" placeholder="Username">
+        <input type="password" id="signupPassword" placeholder="Password">
+        <button onclick="signUp()">Sign Up</button>
+
+        <h2>Login</h2>
+        <input type="text" id="loginUsername" placeholder="Username">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="appSection" style="display:none;">
+        <h2>Dashboard</h2>
+
+        <h3>Bird Information</h3>
+        <input type="number" id="birdCount" placeholder="Number of birds">
+        <input type="text" id="birdType" placeholder="Type of birds">
+        <button onclick="saveBirdInfo()">Save Birds</button>
+
+        <h3>Egg Collection</h3>
+        <input type="number" id="eggCount" placeholder="Number of eggs">
+        <button onclick="saveEggs()">Save Eggs</button>
+
+        <h3>Sales</h3>
+        <input type="number" id="soldCount" placeholder="Birds sold">
+        <button onclick="saveSold()">Save Sold</button>
+
+        <h3>Vaccination</h3>
+        <input type="text" id="vaccineName" placeholder="Vaccine name">
+        <input type="date" id="vaccineDate">
+        <button onclick="saveVaccine()">Save Vaccine</button>
+    </div>
+
+    <script>
+        async function signUp() {
+            const username = document.getElementById('signupUsername').value;
+            const password = document.getElementById('signupPassword').value;
+
+            const res = await fetch('/signup', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            const msg = await res.text();
+            alert(msg);
+        }
+
+        async function login() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const res = await fetch('/login', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (res.ok) {
+                document.getElementById('authSection').style.display = 'none';
+                document.getElementById('appSection').style.display = 'block';
+            } else {
+                alert('Invalid credentials');
+            }
+        }
+
+        async function saveBirdInfo() {
+            const count = document.getElementById('birdCount').value;
+            const type = document.getElementById('birdType').value;
+
+            const res = await fetch('/birds', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ count, type })
+            });
+
+            alert(await res.text());
+        }
+
+        async function saveEggs() {
+            const count = document.getElementById('eggCount').value;
+
+            const res = await fetch('/eggs', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ count })
+            });
+
+            alert(await res.text());
+        }
+
+        async function saveSold() {
+            const count = document.getElementById('soldCount').value;
+
+            const res = await fetch('/sold', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ count })
+            });
+
+            alert(await res.text());
+        }
+
+        async function saveVaccine() {
+            const name = document.getElementById('vaccineName').value;
+            const date = document.getElementById('vaccineDate').value;
+
+            const res = await fetch('/vaccine', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, date })
+            });
+
+            alert(await res.text());
+        }
+    </script>
+>>>>>>> b2edcefcd60910b75896dc82c968832005891822
+</body>
+</html>
