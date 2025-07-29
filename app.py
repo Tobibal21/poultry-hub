@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key'  # Change this to something secure
+app.secret_key = 'your-secret-key'  # Replace with a secure key in production
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -17,7 +17,6 @@ class User(db.Model):
     password = db.Column(db.String(200), nullable=False)
 
 # ---------- Routes ----------
-
 @app.route('/')
 def index():
     if 'user_id' in session:
